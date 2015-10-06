@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+
+  devise_for :users, :controllers => {registrations: 'registrations'}
+
+
   get 'persons/profile'
 
   root 'static_pages#home'

@@ -13,11 +13,12 @@
 
     </ul>
 
-    <ul class="nav   navbar-right" style="margin-right: 23px">
+    <ul class="nav navbar-nav  navbar-right" style="margin-right: 23px">
 
 
       <% if user_signed_in? %>
-          <span>Здравствуйте, <%= current_user.first_name current_user.last_name %></span>
+
+          <h5 style="color: #EFEFEF">Здравствуйте, <%= current_user.first_name+" "+current_user.last_name %></h5>
           <%= link_to '<button type="button" class="btn btn-primary">Выйти</button>'.html_safe,  destroy_user_session_path, :method => :delete %>
 
       <% else %>
