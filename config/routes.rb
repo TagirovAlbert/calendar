@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+  get 'persons/profile'
+
   root 'static_pages#home'
 
   match '/help', to: 'static_pages#help', via: 'get'
  match '/about', to: 'static_pages#about', via: 'get'
+
+  get 'persons/profile', as: 'user_root'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
