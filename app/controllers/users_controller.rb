@@ -30,11 +30,13 @@ class UsersController < ApplicationController
       # GET/PATCH /users/:id/finish_signup
   def finish_signup
     # authorize! :update, @user
+    @user= User.find(params[:id])
     if request.patch? && params[:user] #&& params[:user][:email]
+      @user.skip_reconfirmation!
+
       if @user.update(user_params)
-        @user.skip_reconfirmation!
         sign_in(@user, :bypass => true)
-        redirect_to @user, notice: 'Ваш профиль был удачно обновлён!'
+        redirect_to user_profile_path, notice: 'Ваш профиль был удачно обновлён!'
       else
         @show_errors = true
       end

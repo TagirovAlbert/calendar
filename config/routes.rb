@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   resources :users, :only => [:index, :destroy]
 
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
-  get 'persons/profile'
-
+  match 'user/:id/profile' => 'persons#profile', via: :get, :as => :user_profile
   root 'static_pages#home'
 
   match '/help', to: 'static_pages#help', via: 'get'

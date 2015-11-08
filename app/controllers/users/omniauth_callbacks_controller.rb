@@ -9,7 +9,7 @@ class Users::OmniauthCallbacksController < ApplicationController
         @user = User.find_for_facebook_oauth(env["omniauth.auth"])
 
         if @user.persisted?
-          sign_in_and_redirect @user, :event => :authentication
+          sign_in_and_redirect @user, event: :authentication
           flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
           print "почти редиректнулся"
         else
