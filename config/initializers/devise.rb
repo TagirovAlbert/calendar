@@ -13,11 +13,11 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-
+  config.omniauth :facebook, "713513235448832", "b1ee737c380f54265b8061c8b5950bfb"
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
-  # ==> ORM configuration
+   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.

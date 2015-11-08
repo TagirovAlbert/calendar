@@ -20,9 +20,8 @@ Rails.application.configure do
   config.active_support.deprecation = :log
 
   # Raise an error on page load if there are pending migrations.
-  config.active_record.migration_error = :page_load
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.

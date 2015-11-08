@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
 
-  devise_for :users, :controllers => {registrations: 'registrations'}
 
+  devise_for :users, controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}
+  resources :users, :only => [:index, :destroy]
 
+  match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   get 'persons/profile'
 
   root 'static_pages#home'
