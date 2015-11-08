@@ -11,17 +11,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
-
   def self.find_for_facebook_oauth access_token
     if user = User.where(:uid => access_token.uid).first
       user
     else
-      p access_token.provider
-      p access_token.uid
-      p access_token['extra']['raw_info']['name'].split.first
-      p access_token['extra']['raw_info']['name'].split.second
-      p access_token['info']['email']
-      p access_token['info']['verified']
       email_is_verified = access_token['info']['email'] && access_token['info']['verified']
       email = access_token['info']['email'] if email_is_verified
       user_new=User.new(:provider => access_token.provider,

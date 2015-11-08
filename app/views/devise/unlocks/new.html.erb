@@ -1,11 +1,11 @@
-<h2>Повторно отправить инструкции</h2>
+<div class="container-alba"><h2>Повторно отправить инструкции</h2>
 
 <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true,class: 'form-control input-lg' %>
   </div>
 
   <div class="actions">
@@ -14,3 +14,4 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
