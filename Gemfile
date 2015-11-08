@@ -15,6 +15,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'protected_attributes'
 #auth user in site
 gem 'devise'
+
+gem 'omniauth'
+gem 'omniauth-facebook'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

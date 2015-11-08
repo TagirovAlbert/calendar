@@ -1,2 +1,10 @@
-<h1>Persons#profile</h1>
-<p>Find me in app/views/persons/profile.html.erb</p>
+<div class="container">
+    <h2>Профиль</h2>
+ <h4><%=current_user.last_name%></h4>
+  <h4><%=current_user.first_name%></h4>
+  <h4><%=current_user.login%></h4>
+  <h4><%=current_user.email%></h4>
+  <h4><%=current_user.age%> лет</h4>
+  <%= link_to '<button type="button" class="btn btn-primary">Изменить профиль</button>'.html_safe,  edit_user_registration_path %>
+
+</div>

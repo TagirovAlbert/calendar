@@ -7,6 +7,8 @@
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
       <li><%=link_to "Главная", root_path%></li>
+      <% if user_signed_in? {}%>
+      <li><%=link_to "Профиль", user_profile_url(current_user.id)%></li><%end%>
       <li><%=link_to "События", '#'%></li>
       <li><%=link_to "Мои события", '#'%><li>
 

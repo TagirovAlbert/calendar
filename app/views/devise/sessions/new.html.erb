@@ -1,17 +1,17 @@
-<h2>Войти</h2>
+<div class="container-alba"> <h2>Войти</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
 
 
-    <div class="field">
+    <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true,class: 'form-control input-lg' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off",class: 'form-control input-lg' %>
   </div>
 
 
@@ -19,7 +19,7 @@
     <% if devise_mapping.rememberable? -%>
     <div class="field">
       <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :Запомни_меня %>
     </div>
   <% end -%>
 
@@ -29,3 +29,4 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>
