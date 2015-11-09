@@ -23,9 +23,11 @@ gem 'omniauth-facebook'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-
+gem 'jquery_datepicker'
 #connect bootstrap styles
 gem 'bootstrap-sass'
+gem 'jquery-ui-rails'
+
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
