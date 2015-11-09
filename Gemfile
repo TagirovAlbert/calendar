@@ -27,6 +27,8 @@ gem 'jquery_datepicker'
 #connect bootstrap styles
 gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
+#view calendar method
+gem 'calendar_helper'
 
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

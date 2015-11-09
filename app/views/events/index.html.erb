@@ -1,10 +1,21 @@
-<p id="notice"><%= notice %></p>
-
+<div class="container-alba">
 <h1>Listing Events</h1>
-
+</div>
   <div id="events">
-    <%= calendar do |date|%>
-      <% date.day%>
+    <h2 id="month">
+      <%= link_to "<", date_rem: @date.prev_month %>
+      <%= @date.strftime("%B %Y")%>
+      <%= link_to ">", date_rem: @date.next_month %>
+    </h2>
+    <%= calendar @date do |date_my|%>
+      <%= date_my.day%>
+        <% if @events_by_date[date_my]  %>
+        <ul>
+            <% @events_by_date[date_my].each do |event| %>
+               <li><%= link_to event.name, event  %></li>
+             <%end%>
+                </ul>
+    <%end%>
       <%end%>
 </div>
-<%= link_to 'New Event', new_event_path %>
+<%= link_to 'New Event', new_event_path,:class => 'btn btn-primary', style: 'text-allign: center' %>
