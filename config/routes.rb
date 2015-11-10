@@ -3,8 +3,7 @@ Rails.application.routes.draw do
 
 
   resources :events
-  devise_for :users, controllers: {registrations: "registrations", omniauth_callbacks: "users/omniauth_callbacks"}
-  resources :users, :only => [:index, :destroy]
+  devise_for :users, controllers: {registrations: "registrations",sessions: "sessions", omniauth_callbacks: "users/omniauth_callbacks"}
   match '/users/my_events' => 'events#my_index', via: [:get, :patch], :as => :my_events
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
   match 'user/:id/profile' => 'persons#profile', via: :get, :as => :user_profile

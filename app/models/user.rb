@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
   TEMP_EMAIL_REGEX = /\Achange@me/
   TEMP_LOGIN_PREFIX = 'example_login'
   TEMP_AGE_PREFIX = 20
-  has_many :events
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable, :omniauthable,
+  devise :database_authenticatable, :registerable,:omniauthable, #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_many :events
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
   def self.find_for_facebook_oauth access_token

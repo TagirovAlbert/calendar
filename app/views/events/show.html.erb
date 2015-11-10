@@ -27,13 +27,17 @@
       <%end%>
   </p>
 
+<% if !(@event.public) %>
+<%= link_to 'Редактировать', edit_event_path(@event) ,class: 'form-control input-lg'%>
+      <%= link_to 'Назад', my_events_path,class: 'form-control input-lg' %>
+  <%elsif (@event.public &&@event.user.email.eql?(current_user.email))%>
+      <%= link_to 'Редактировать', edit_event_path(@event), class: 'form-control input-lg' %>
+      <%= link_to 'Назад', events_path,class: 'form-control input-lg' %>
 
-<% if !(@event.public)%>
-<%= link_to 'Редактировать', edit_event_path(@event) %>
-      <%= link_to 'Назад', my_events_path %>
-  <%else%>
-      <%= link_to 'Назад', events_path %>
+<%else%>
 
+      <%= link_to 'Назад', events_path,class: 'form-control input-lg' %>
 <%end%>
+
 
 </div>
