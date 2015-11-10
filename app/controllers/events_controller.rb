@@ -4,9 +4,18 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-    @events_by_date=@events.group_by { |i| i.date_rem.to_date }
+
+    @events = Event.is_public
+    @events_by_date_all=@events.group_by { |i| i.date_rem.to_date }
     @date= params[:date_rem] ? Date.parse(params[:date_rem]) : Date.today
+
+    end
+  def my_index
+    @my_events=current_user.events.all
+    @date= params[:date_rem] ? Date.parse(params[:date_rem]) : Date.today
+    @events_by_date_my= @my_events.group_by {|j| j.date_rem.to_date}
+
+
   end
 
   # GET /events/1
@@ -27,7 +36,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
+    @event.user=current_user
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -71,6 +80,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :date_rem)
+      params.require(:event).permit(:name, :description, :date_rem, :public, :everyday, :everyweek,:everymonth, :everyyear)
     end
 end

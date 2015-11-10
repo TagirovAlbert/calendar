@@ -12,18 +12,40 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :Название %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label :Описание_события %><br>
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :date %><br>
+    <%= f.label :Дата %><br>
     <%= f.text_field :date_rem %>
   </div>
-  <div class="actions">
+    <div class="field">
+  <%= f.check_box :public %>
+  <%= f.label :Сделать_событие_публичным %>
+    </div>
+
+    <div class="field">
+    <%= f.check_box :everyday %>
+    <%= f.label :Повторять_событие_на_каждый_день %>
+</div>
+    <div class="field">
+      <%= f.check_box :everyday %>
+      <%= f.label :Повторять_событие_на_каждую_неделю %>
+    </div>
+    <div class="field">
+      <%= f.check_box :everyday %>
+      <%= f.label :Повторять_событие_на_каждый_месяц %>
+    </div>
+
+    <div class="field">
+      <%= f.check_box :everyday %>
+      <%= f.label :Повторять_событие_на_каждый_год %>
+    </div>
+   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>

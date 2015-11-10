@@ -1,20 +1,39 @@
 <div class="container-alba"><p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Название:</strong>
   <%= @event.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Описание события:</strong>
   <%= @event.description %>
 </p>
 
 <p>
-  <strong>Date:</strong>
+  <strong>Дата:</strong>
   <%= @event.date_rem %>
 </p>
+<p>
+  <strong>Автор:</strong>
+  <%= @event.user.first_name + " "+ @event.user.last_name %>
+</p>
+  <p>
+    <strong>Статус:</strong>
+    <%if (@event.public) %>
+     <p>Публичный</p>
+      <%else%>
+      <p>Приватный</p>
+      <%end%>
+  </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+
+<% if !(@event.public)%>
+<%= link_to 'Редактировать', edit_event_path(@event) %>
+      <%= link_to 'Назад', my_events_path %>
+  <%else%>
+      <%= link_to 'Назад', events_path %>
+
+<%end%>
+
 </div>

@@ -1,21 +1,17 @@
 <div class="container-alba">
-<h1>Listing Events</h1>
+<h1>Список событий</h1>
 </div>
   <div id="events">
-    <h2 id="month">
-      <%= link_to "<", date_rem: @date.prev_month %>
-      <%= @date.strftime("%B %Y")%>
-      <%= link_to ">", date_rem: @date.next_month %>
-    </h2>
+    <%= render 'title' %>
     <%= calendar @date do |date_my|%>
       <%= date_my.day%>
-        <% if @events_by_date[date_my]  %>
+        <% if @events_by_date_all[date_my]  %>
         <ul>
-            <% @events_by_date[date_my].each do |event| %>
+            <% @events_by_date_all[date_my].each do |event| %>
                <li><%= link_to event.name, event  %></li>
              <%end%>
                 </ul>
     <%end%>
       <%end%>
 </div>
-<%= link_to 'New Event', new_event_path,:class => 'btn btn-primary', style: 'text-allign: center' %>
+<%= link_to 'Новое событие', new_event_path,:class => 'btn btn-primary' %>

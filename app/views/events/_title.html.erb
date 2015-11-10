@@ -1,0 +1,5 @@
+<h2 id="month">
+  <%= link_to "<", date_rem: @date.prev_month %>
+  <%= @date.strftime("%B %Y")%>
+  <%= link_to ">", date_rem: @date.next_month %>
+</h2>
