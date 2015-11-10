@@ -29,6 +29,8 @@ gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
 #view calendar method
 gem 'calendar_helper'
+#for event every day, every week ....
+gem 'recurrence'
 
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

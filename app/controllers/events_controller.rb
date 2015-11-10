@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  require 'recurrence'
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
   # GET /events
@@ -12,11 +13,40 @@ class EventsController < ApplicationController
     end
   def my_index
     @my_events=current_user.events.all
+    @my_list_events=nil
+    @my_events.each do |my_event|
+      if my_event.everyday
+        event_date=my_event.date_rem.to_date
+        days = Recurrence.new(:every => :day, :starts => event_date,:through => event_date.next_month)
+        days.each do |my_dey|
+          my_event.date_rem=my_dey
+          @my_list_events.push(my_event)
+        end
+
+      end
+
+      if my_event.everymonth
+
+      end
+
+      if my_event.everyweek
+
+      end
+
+      if my_event.everyyear
+
+
+      end
+    end
+    @events_by_date_my= @my_list_events.group_by {|j| j.date_rem.to_date}
     @date= params[:date_rem] ? Date.parse(params[:date_rem]) : Date.today
-    @events_by_date_my= @my_events.group_by {|j| j.date_rem.to_date}
+
 
 
   end
+
+
+
 
   # GET /events/1
   # GET /events/1.json
