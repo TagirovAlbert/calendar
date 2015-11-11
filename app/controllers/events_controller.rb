@@ -13,37 +13,42 @@ class EventsController < ApplicationController
     end
   def my_index
     @my_events=current_user.events.all
-    @my_list_events=nil
+    @my_list_events=Array.new
     @my_events.each do |my_event|
+      event_date=my_event.date_rem.to_date
+
       if my_event.everyday
-        event_date=my_event.date_rem.to_date
         days = Recurrence.new(:every => :day, :starts => event_date,:through => event_date.next_month)
         days.each do |my_dey|
-          my_event.date_rem=my_dey
-          @my_list_events.push(my_event)
+          event_curr=Event.find_or_initialize_by(id: my_event[:id])
+          event_curr.date_rem=my_dey.to_s
+          @my_list_events.push(event_curr)
         end
 
       end
 
       if my_event.everymonth
+        weeks=Recurrence.weekly(:on => event_date.mday, :through=>event_date.next_year)
+        weeks.each do |my_week|
+          event_curr=Event.find_or_initialize_by(id: my_event[:id])
+          event_curr.date_rem=my_week.to_s
+          @my_list_events.push(event_curr)
 
+
+
+        end
       end
 
-      if my_event.everyweek
-
-      end
-
-      if my_event.everyyear
 
 
-      end
     end
     @events_by_date_my= @my_list_events.group_by {|j| j.date_rem.to_date}
     @date= params[:date_rem] ? Date.parse(params[:date_rem]) : Date.today
 
-
-
   end
+
+
+
 
 
 
