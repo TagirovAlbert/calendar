@@ -18,26 +18,32 @@ class EventsController < ApplicationController
       event_date=my_event.date_rem.to_date
 
       if my_event.everyday
-        days = Recurrence.new(:every => :day, :starts => event_date,:through => event_date.next_month)
-        days.each do |my_dey|
-          event_curr=Event.find_or_initialize_by(id: my_event[:id])
-          event_curr.date_rem=my_dey.to_s
-          @my_list_events.push(event_curr)
-        end
+        days = Recurrence.daily(:through => event_date.next_month)
+        event_iter(days,@my_list_events,my_event)
 
+        #days.each do |my_dey|
+         # event_curr=Event.find_or_initialize_by(id: my_event[:id])
+          #event_curr.date_rem=my_dey.to_s
+          #@my_list_events.push(event_curr)
+
+      end
+
+      if my_event.everyweek
+        weeks=Recurrence.weekly(:on => event_date.wday, :through=>event_date.next_year)
+        event_iter(weeks,@my_list_events,my_event)
       end
 
       if my_event.everymonth
-        weeks=Recurrence.weekly(:on => event_date.mday, :through=>event_date.next_year)
-        weeks.each do |my_week|
-          event_curr=Event.find_or_initialize_by(id: my_event[:id])
-          event_curr.date_rem=my_week.to_s
-          @my_list_events.push(event_curr)
+        months=Recurrence.monthly(:on => event_date.mday)
+        event_iter(months,@my_list_events,my_event)
 
-
-
-        end
       end
+
+      if my_event.everyyear
+        years=Recurrence.yearly(:on=> [event_date.mon,event_date.mday])
+        event_iter(years,@my_list_events,my_event)
+      end
+
 
 
 
@@ -111,6 +117,17 @@ class EventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+    end
+
+  def event_iter(reccure,list,event)
+    reccure.each do |my_reccure|
+      event_curr=Event.find_or_initialize_by(id: event[:id])
+      event_curr.date_rem=my_reccure.to_s
+      list.push(event_curr)
+
+
+
+    end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
