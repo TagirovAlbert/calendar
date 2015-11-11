@@ -7,8 +7,9 @@ class User < ActiveRecord::Base
   TEMP_AGE_PREFIX = 20
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable, :omniauthable,
+  devise :database_authenticatable, :registerable,:omniauthable, #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_many :events
 
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
   def self.find_for_facebook_oauth access_token

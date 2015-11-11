@@ -1,6 +1,3 @@
-class SessionsController < ApplicationController
-  def create
+class SessionsController < Devise::SessionsController
 
-    super
-  end
 end
