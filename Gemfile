@@ -24,13 +24,14 @@ gem 'omniauth-facebook'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'jquery_datepicker'
 #connect bootstrap styles
 gem 'bootstrap-sass'
 #view calendar method
 gem 'calendar_helper'
 #for event every day, every week ....
 gem 'recurrence'
+#for dependent checkboxes
+gem 'dependent-fields-rails'
 
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

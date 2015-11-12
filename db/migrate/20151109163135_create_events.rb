@@ -3,7 +3,7 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string :name, null:false
       t.string :description, null:false
-      t.string :date_rem, null:false
+      t.date :date_rem, null:false
       t.boolean :public
       t.boolean :everyday
       t.boolean :everyweek

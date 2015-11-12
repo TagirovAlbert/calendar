@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20151110110133) do
   create_table "events", force: :cascade do |t|
     t.string   "name",        null: false
     t.string   "description", null: false
-    t.string   "date_rem",    null: false
+    t.date     "date_rem",    null: false
     t.boolean  "public"
     t.boolean  "everyday"
     t.boolean  "everyweek"
