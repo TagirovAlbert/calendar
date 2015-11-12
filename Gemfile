@@ -23,10 +23,10 @@ gem 'omniauth-facebook'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'jquery_datepicker'
 #connect bootstrap styles
 gem 'bootstrap-sass'
-gem 'jquery-ui-rails'
 #view calendar method
 gem 'calendar_helper'
 #for event every day, every week ....

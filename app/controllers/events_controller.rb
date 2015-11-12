@@ -2,6 +2,7 @@ class EventsController < ApplicationController
   require 'recurrence'
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+
   # GET /events
   # GET /events.json
   def index
@@ -21,12 +22,7 @@ class EventsController < ApplicationController
         days = Recurrence.daily(:through => event_date.next_month)
         event_iter(days,@my_list_events,my_event)
 
-        #days.each do |my_dey|
-         # event_curr=Event.find_or_initialize_by(id: my_event[:id])
-          #event_curr.date_rem=my_dey.to_s
-          #@my_list_events.push(event_curr)
-
-      end
+        end
 
       if my_event.everyweek
         weeks=Recurrence.weekly(:on => event_date.wday, :through=>event_date.next_year)
@@ -48,6 +44,7 @@ class EventsController < ApplicationController
 
 
     end
+    @my_list_events.uniq! { |uniq_event| [uniq_event.id, uniq_event.date_rem] }
     @events_by_date_my= @my_list_events.group_by {|j| j.date_rem.to_date}
     @date= params[:date_rem] ? Date.parse(params[:date_rem]) : Date.today
 
@@ -121,15 +118,16 @@ class EventsController < ApplicationController
 
   def event_iter(reccure,list,event)
     reccure.each do |my_reccure|
-      event_curr=Event.find_or_initialize_by(id: event[:id])
+      event_curr=Event.find_or_initialize_by(id: event[:id],date_rem: event[:date_rem])
       event_curr.date_rem=my_reccure.to_s
-      list.push(event_curr)
+
+      list<<event_curr
+
 
 
 
     end
-    end
-
+end
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:name, :description, :date_rem, :public, :everyday, :everyweek,:everymonth, :everyyear)
