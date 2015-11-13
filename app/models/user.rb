@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,:omniauthable, #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :events
-
+  validates :first_name,:last_name, presence: true,length: {in: 3..18}
+  validates_numericality_of :age, :only_integer => true, :less_than_or_equal_to=> 100,:greater_than_or_equal_to => 12
+  validates :login, presence: true, uniqueness:true
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
   def self.find_for_facebook_oauth access_token
     if user = User.where(:uid => access_token.uid).first
