@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
     else
       resource.update_with_password(params)
     end
-    end
+  end
   private
 
   def sign_up_params

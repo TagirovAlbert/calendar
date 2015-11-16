@@ -24,7 +24,15 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
   config.action_mailer.default_url_options = { :host => 'https://fs-calendar-alba.herokuapp.com/' }
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address:  "smtp.gmail.com",
+      port:  587,
+      authentication: "plain",
+      domain: 'https://fs-calendar-alba.herokuapp.com/',
+      user_name: "berttagirovgmail.com",
+      password:  "1673225ta"
+  }
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
