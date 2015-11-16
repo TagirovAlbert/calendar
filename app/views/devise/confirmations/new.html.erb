@@ -1,7 +1,7 @@
 <div class="container-alba">
   <h2>Повторная отправка инструкции подтверждения</h2>
 
-<%= form_for(resource, as: resource_name, url: user_confirmation_path, data: { method: :post }) do |f| %>
+<%= form_for(resource, as: resource_name, url: user_confirmation_url(confirmation_token: @user.confirmation_token)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="form-group">
