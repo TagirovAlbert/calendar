@@ -9,7 +9,7 @@ class EventsController < ApplicationController
 
     @events = Event.is_public
     @events_by_date_all=@events.group_by { |i| i.date_rem }
-    @date= params[:date_rem] ? params[:date_rem] : Date.today
+    @date= params[:date_rem] ? params[:date_rem].to_date : Date.today
 
     end
   def my_index

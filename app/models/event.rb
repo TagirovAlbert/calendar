@@ -3,5 +3,5 @@ class Event < ActiveRecord::Base
   belongs_to :user
   validates :name, presence: true,
             length: { maximum: 25 }
-  validates :description, absence: true, length: {in: 10..100}
+  validates :description, presence: true, length: {in: 10..100}
 end
