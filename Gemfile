@@ -33,9 +33,9 @@ gem 'recurrence'
 #for dependent checkboxes
 gem 'dependent-fields-rails'
 
-gem 'mailcatcher'
 
-
+#user for testing sending confirmation instructions
+#gem 'mailcatcher'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
