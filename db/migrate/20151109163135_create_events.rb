@@ -4,11 +4,11 @@ class CreateEvents < ActiveRecord::Migration
       t.string :name, null:false
       t.string :description, null:false
       t.date :date_rem, null:false
-      t.boolean :public
-      t.boolean :everyday
-      t.boolean :everyweek
-      t.boolean :everymonth
-      t.boolean :everyyear
+      t.boolean :public, default: false
+      t.boolean :everyday, default: false
+      t.boolean :everyweek, default: false
+      t.boolean :everymonth, default:false
+      t.boolean :everyyear, default: false
       t.timestamps null: false
     end
   end

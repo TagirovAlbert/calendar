@@ -17,16 +17,16 @@ ActiveRecord::Schema.define(version: 20151110110133) do
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.string   "description", null: false
-    t.date     "date_rem",    null: false
-    t.boolean  "public"
-    t.boolean  "everyday"
-    t.boolean  "everyweek"
-    t.boolean  "everymonth"
-    t.boolean  "everyyear"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",                        null: false
+    t.string   "description",                 null: false
+    t.date     "date_rem",                    null: false
+    t.boolean  "public",      default: false
+    t.boolean  "everyday",    default: false
+    t.boolean  "everyweek",   default: false
+    t.boolean  "everymonth",  default: false
+    t.boolean  "everyyear",   default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "user_id"
   end
 
