@@ -21,22 +21,22 @@
   </div>
   <div class="field">
     <%= f.label :Дата %><br>
-    <%= f.date_select :date_rem%>
+    <%= f.date_select :date_rem, start_year: 1925,:order => [:day, :month, :year]%>
   </div>
-    <div class="field">
-  <%= f.check_box :public %>
-  <%= f.label :Сделать_событие_публичным %>
+    <div class="field" id="myCheck">
+  <%= f.check_box :public%>
+  <%= f.label :Сделать_событие_публичным%>
     </div>
 
-    <div class="field">
-    <%= f.check_box :everyday %>
+    <div class="field" id="myBox" >
+    <%= f.check_box :everyday%>
     <%= f.label :Повторять_событие_на_каждый_день %>
 </div>
-    <div class="field">
+    <div class="field" id="myBox" >
       <%= f.check_box :everyweek %>
       <%= f.label :Повторять_событие_на_каждую_неделю %>
     </div>
-    <div class="field">
+    <div class="field" id="myBox" >
       <%= f.check_box :everymonth %>
       <%= f.label :Повторять_событие_на_каждый_месяц %>
     </div>

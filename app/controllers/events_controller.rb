@@ -8,7 +8,16 @@ class EventsController < ApplicationController
   def index
 
     @events = Event.is_public
-    @events_by_date_all=@events.group_by { |i| i.date_rem }
+    @my_list_events=Array.new
+    @events.each do |public_event|
+      event_date=public_event.date_rem
+      if public_event.everyyear
+        years=Recurrence.yearly(:on=> [event_date.mon,event_date.mday])
+        event_iter(years,@my_list_events,public_event)
+      end
+
+    end
+    @events_by_date_all=@my_list_events.group_by { |i| i.date_rem }
     @date= params[:date_rem] ? params[:date_rem].to_date : Date.today
 
     end
