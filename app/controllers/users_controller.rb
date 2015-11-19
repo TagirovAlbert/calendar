@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     # authorize! :update, @user
     @user= User.find(params[:id])
     if request.patch? && params[:user] #&& params[:user][:email]
-      @user.skip_reconfirmation!
+      #@user.skip_reconfirmation!
 
       if @user.update(user_params)
         sign_in(@user, :bypass => true)

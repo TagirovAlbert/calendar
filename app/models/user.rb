@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   TEMP_AGE_PREFIX = 20
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,:omniauthable, :confirmable,
+  devise :database_authenticatable, :registerable,:omniauthable, #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :events
  validates :first_name,:last_name, presence: true,length: {in: 3..18}
@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,:omniauthable, :confirmable,
+  devise :database_authenticatable, :registerable,:omniauthable, #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :events
 
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
                    :login => "#{TEMP_LOGIN_PREFIX}",
                    :age => "#{TEMP_AGE_PREFIX}",
                    :password => Devise.friendly_token[0,20])
-      user_new.skip_confirmation!
+      #user_new.skip_confirmation!
       user_new.save!
     end
   end
