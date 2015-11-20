@@ -28,7 +28,7 @@
   <%= f.check_box :private, id: 'event_extended'%>
   <%= f.label :Сделать_событие_приватным%>
     </div>
-      <%= content_tag :div, class: 'js-dependent-fields', data: { 'checkbox-id': 'event_extended', 'checkbox-value': 'true'} do %>
+      <%= content_tag :div, class: 'js-dependent-fields', data: { 'checkbox-id'=> 'event_extended', 'checkbox-value'=> 'true'} do %>
 
       <div class="field"  >
     <%= f.check_box :everyday%>
