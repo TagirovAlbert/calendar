@@ -1,4 +1,5 @@
-<div class="container-alba"><%= form_for(@event) do |f| %>
+<div class="container-alba">
+  <%= form_for(@event) do |f| %>
   <% if @event.errors.any? %>
     <div class="alert-error">
       <h4><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h4>
@@ -23,28 +24,34 @@
     <%= f.label :Дата %><br>
     <%= f.date_select :date_rem, start_year: 1925,:order => [:day, :month, :year]%>
   </div>
-    <div class="field" id="myCheck">
-  <%= f.check_box :public%>
-  <%= f.label :Сделать_событие_публичным%>
+    <div class="field" >
+  <%= f.check_box :private, id: 'event_extended'%>
+  <%= f.label :Сделать_событие_приватным%>
     </div>
+      <%= content_tag :div, class: 'js-dependent-fields', data: { 'checkbox-id': 'event_extended', 'checkbox-value': 'true'} do %>
 
-    <div class="field" id="myBox" >
+      <div class="field"  >
     <%= f.check_box :everyday%>
     <%= f.label :Повторять_событие_на_каждый_день %>
-</div>
-    <div class="field" id="myBox" >
+     </div>
+
+
+    <div class="field"  >
       <%= f.check_box :everyweek %>
       <%= f.label :Повторять_событие_на_каждую_неделю %>
     </div>
-    <div class="field" id="myBox" >
+    <div class="field" >
       <%= f.check_box :everymonth %>
       <%= f.label :Повторять_событие_на_каждый_месяц %>
     </div>
+  <% end %>
 
     <div class="field">
       <%= f.check_box :everyyear %>
       <%= f.label :Повторять_событие_на_каждый_год %>
     </div>
+
+
    <div class="actions">
     <%= f.submit %>
   </div>

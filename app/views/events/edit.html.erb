@@ -4,5 +4,6 @@
 <%= render 'form' %>
 
 <%= link_to 'Показать', @event,:class => 'btn btn-primary' %> |
-<%= link_to 'Назад', events_path, :class => 'btn btn-primary' %>
+<%= link_to 'Назад', events_path, :class => 'btn btn-primary' %>|
+ <%= link_to 'Удалить', @event,method: :delete, :class => 'btn btn-primary' %>
 </div>
