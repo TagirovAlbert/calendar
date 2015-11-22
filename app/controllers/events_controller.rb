@@ -8,7 +8,18 @@ class EventsController < ApplicationController
   def index
 
     @events = Event.is_public
-    @events_by_date_all=@events.group_by { |i| i.date_rem }
+    @my_list_events=Array.new
+    @events.each do |public_event|
+      event_date=public_event.date_rem
+      if public_event.everyyear
+        years=Recurrence.yearly(:on=> [event_date.mon,event_date.mday])
+        event_iter(years,@my_list_events,public_event)
+      else
+        @my_list_events<<public_event
+
+      end
+    end
+    @events_by_date_all=@my_list_events.group_by { |i| i.date_rem }
     @date= params[:date_rem] ? params[:date_rem].to_date : Date.today
 
     end
@@ -17,7 +28,7 @@ class EventsController < ApplicationController
     @my_list_events=Array.new
     @my_events.each do |my_event|
       event_date=my_event.date_rem
-
+    if my_event.private
       if my_event.everyday
         days = Recurrence.daily(:through => event_date.next_month)
         event_iter(days,@my_list_events,my_event)
@@ -39,6 +50,11 @@ class EventsController < ApplicationController
         years=Recurrence.yearly(:on=> [event_date.mon,event_date.mday])
         event_iter(years,@my_list_events,my_event)
       end
+    else
+      @my_list_events<<my_event
+
+      end
+
 
 
 
@@ -131,16 +147,14 @@ class EventsController < ApplicationController
 end
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      po=params.require(:event).permit(:name, :description, :public, :everyday, :everyweek,:everymonth, :everyyear)
+      po=params.require(:event).permit(:name, :description, :private, :everyday, :everyweek,:everymonth, :everyyear)
       po[:date_rem]=event_param_date
-      puts po
       po
     end
 
     def event_param_date
       date_param=params.require(:event).permit(:date_rem)
       p= Date.parse( date_param.to_a.sort.collect{|c| c[1]}.join("-"))
-      puts p
       p
     end
 

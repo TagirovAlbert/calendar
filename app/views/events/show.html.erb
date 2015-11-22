@@ -20,17 +20,17 @@
 </p>
   <p>
     <strong>Статус:</strong>
-    <%if (@event.public) %>
-     <p>Публичный</p>
-      <%else%>
+    <%if (@event.private) %>
       <p>Приватный</p>
-      <%end%>
+      <%else%>
+      <p>Публичный</p>
+    <%end%>
   </p>
 
-<% if !(@event.public) %>
+<% if (@event.private) %>
 <%= link_to 'Редактировать', edit_event_path(@event) ,class: 'form-control input-lg'%>
       <%= link_to 'Назад', my_events_path,class: 'form-control input-lg' %>
-  <%elsif (@event.public &&@event.user.email.eql?(current_user.email))%>
+  <%elsif (!@event.private &&@event.user.email.eql?(current_user.email))%>
       <%= link_to 'Редактировать', edit_event_path(@event), class: 'form-control input-lg' %>
       <%= link_to 'Назад', events_path,class: 'form-control input-lg' %>
 
