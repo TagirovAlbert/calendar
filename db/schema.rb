@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20151110110133) do
     t.string   "name",                        null: false
     t.string   "description",                 null: false
     t.date     "date_rem",                    null: false
-    t.boolean  "private",     default: false
+    t.boolean  "public",      default: false
     t.boolean  "everyday",    default: false
     t.boolean  "everyweek",   default: false
     t.boolean  "everymonth",  default: false

@@ -1,15 +1,17 @@
 class Users::OmniauthCallbacksController < ApplicationController
 
   def facebook
-    @user = User.find_for_facebook_oauth(env["omniauth.auth"])
-     if @user.persisted?
-       sign_in_and_redirect @user, event: :authentication
-       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
-     else
-       session["devise.facebook_data"] = env["omniauth.auth"]
-       redirect_to new_user_registration_url
-     end
-  end
+        @user = User.find_for_facebook_oauth(env["omniauth.auth"])
+
+        if @user.persisted?
+          sign_in_and_redirect @user, event: :authentication
+          flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
+          print "почти редиректнулся"
+        else
+          session["devise.facebook_data"] = env["omniauth.auth"]
+          redirect_to new_user_registration_url
+        end
+      end
 
 
 

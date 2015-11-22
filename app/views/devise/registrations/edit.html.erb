@@ -5,16 +5,8 @@
   <%= devise_error_messages! %>
 
   <div class="form-group">
-    <%= f.label :Фамилия %><br />
-    <%= f.text_field :last_name, :autofocus => true,  class: 'form-control input-lg'%>
-  </div>
-  <div class="form-group">
-    <%= f.label :Имя %><br />
-    <%= f.text_field :first_name, :autofocus => true,  class: 'form-control input-lg'%>
-  </div>
-  <div class="form-group">
     <%= f.label :Email %><br />
-    <%= f.text_field :email, :autofocus => true,  class: 'form-control input-lg'%>
+    <%= f.email_field :email, :autofocus => true,  class: 'form-control input-lg'%>
   </div>
   <div class="form-group">
   <%= f.label :Логин %><br />
@@ -26,20 +18,22 @@
 </div>
 
 
-
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Ожидание подтверждения для: <%= resource.unconfirmed_email %></div>
+  <% end %>
 <% if current_user.uid.nil?%>
   <div class="form-group">
-    <%= f.label :Пароль %> <i>(оставьте пустым, если вы не хотите его изменить)</i><br />
+    <%= f.label :password %> <i>(оставьте пустым, если вы не хотите его изменить)</i><br />
     <%= f.password_field :password, autocomplete: "off",class: 'form-control input-lg' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :Повторите_пароль %><br />
+    <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off",class: 'form-control input-lg' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :Текущий_пароль %> <i>(для подтверждения изменений введите текущий пароль)</i><br />
+    <%= f.label :current_password %> <i>(для подтверждения изсенений введите текущий пароль)</i><br />
     <%= f.password_field :current_password, autocomplete: "off",class: 'form-control input-lg'%>
   </div>
 <%end%>
