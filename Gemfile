@@ -7,13 +7,6 @@ gem 'rails', '4.2.1'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-gem 'jquery-rails'
-#for dependent checkboxes
-gem 'jquery-turbolinks'
-gem 'rails_depends_on'
-
-gem 'jquery-ui-rails'
-
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -27,13 +20,18 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+
 # Use jquery as the JavaScript library
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 #connect bootstrap styles
 gem 'bootstrap-sass'
 #view calendar method
 gem 'calendar_helper'
 #for event every day, every week ....
 gem 'recurrence'
+#for dependent checkboxes
+gem 'dependent-fields-rails'
 
 
 #use for testing sending confirmation instructions
@@ -58,8 +56,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  # for load enviroment variables from .env to ENV
-  gem 'dotenv'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   #for check ruby grammar
