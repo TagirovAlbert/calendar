@@ -30,8 +30,8 @@ Rails.application.configure do
       port:  587,
       authentication: "plain",
       domain: 'https://fs-calendar-alba.herokuapp.com/',
-      user_name: "berttagirovgmail.com",
-      password:  "1673225ta"
+      user_name: ENV['GMAIL_USERNAME'],
+      password: ENV['GMAIL_PASSWORD']
   }
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier

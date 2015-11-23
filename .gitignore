@@ -13,7 +13,6 @@
 
 #Ignore files in config
 config/database.yml
-config/secrets.yml
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
@@ -21,4 +20,4 @@ config/secrets.yml
 .idea
 
 # Ignore application configuration
-/config/application.yml
+.env
