@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
-
   # GET /users/:id.:format
   def show
   # authorize! :read, @user
@@ -27,13 +25,12 @@ class UsersController < ApplicationController
     end
   end
 
-      # GET/PATCH /users/:id/finish_signup
+  # GET/PATCH /users/:id/finish_signup
   def finish_signup
     # authorize! :update, @user
     @user= User.find(params[:id])
     if request.patch? && params[:user] #&& params[:user][:email]
       #@user.skip_reconfirmation!
-
       if @user.update(user_params)
         sign_in(@user, :bypass => true)
         redirect_to user_profile_path, notice: 'Ваш профиль был удачно обновлён!'
@@ -43,7 +40,7 @@ class UsersController < ApplicationController
     end
   end
 
-      # DELETE /users/:id.:format
+  # DELETE /users/:id.:format
   def destroy
     # authorize! :delete, @user
     @user.destroy
@@ -54,13 +51,13 @@ class UsersController < ApplicationController
   end
 
   private
-  def set_user
-    @user = User.find(params[:id])
-  end
+    def set_user
+      @user = User.find(params[:id])
+    end
 
-  def user_params
-    accessible = [ :email, :age, :login ] # extend with your own params
-    accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
-    params.require(:user).permit(accessible)
-  end
+    def user_params
+      accessible = [ :email, :age, :login ] # extend with your own params
+      accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
+      params.require(:user).permit(accessible)
+    end
 end

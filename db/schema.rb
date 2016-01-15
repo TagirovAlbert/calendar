@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20151110110133) do
     t.string   "description",                 null: false
     t.date     "date_rem",                    null: false
     t.boolean  "private",     default: false
-    t.boolean  "everyday",    default: false
-    t.boolean  "everyweek",   default: false
-    t.boolean  "everymonth",  default: false
-    t.boolean  "everyyear",   default: false
+    t.boolean  "daily",       default: false
+    t.boolean  "weekly",      default: false
+    t.boolean  "monthly",     default: false
+    t.boolean  "yearly",      default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "user_id"

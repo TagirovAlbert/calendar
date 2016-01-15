@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  scope :is_public, -> { where(private: false)}
+  scope :public_events, -> { where(private: false)}
   belongs_to :user
   validates :name, presence: true,
             length: { maximum: 25 }

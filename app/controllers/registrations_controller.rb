@@ -1,7 +1,4 @@
 class RegistrationsController < Devise::RegistrationsController
-
-
-
   def update_resource(resource, params)
     if current_user.provider == "facebook"
       params.delete("current_password")
@@ -19,7 +16,4 @@ class RegistrationsController < Devise::RegistrationsController
   def account_update_params
     params.require(:user).permit(:first_name, :last_name, :email, :age, :login, :password, :password_confirmation, :current_password)
   end
-
-
-
 end

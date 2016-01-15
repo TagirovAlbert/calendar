@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-
-
   TEMP_EMAIL_PREFIX = 'change@me'
   TEMP_EMAIL_REGEX = /\Achange@me/
   TEMP_LOGIN_PREFIX = 'example_login'
@@ -10,7 +8,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,:omniauthable, #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :events
- validates :first_name,:last_name, presence: true,length: {in: 3..18}
+  validates :first_name,:last_name, presence: true,length: {in: 3..18}
   validates_numericality_of :age, :only_integer => true, :less_than_or_equal_to=> 100,:greater_than_or_equal_to => 12
   validates :login, presence: true, uniqueness:true
   validates_format_of :email, :without => TEMP_EMAIL_REGEX, on: :update
@@ -43,9 +41,6 @@ class User < ActiveRecord::Base
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
-
-
-
 
   attr_accessible :first_name, :last_name,:login, :uid, :provider, :email, :age,   :password, :password_confirmation, :remember_me
 end

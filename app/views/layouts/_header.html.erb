@@ -2,38 +2,28 @@
   <div class="container">
    <div class="navbar-header">
      <%= link_to "Calendar Albatros",  root_path, id: "logo", class: "navbar-brand"%>
-
    </div>
-  <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-      <li><%=link_to "Главная", root_path%></li>
-      <li><%=link_to "События", events_path%></li>
-     <% if user_signed_in? {}%>
-      <li><%=link_to "Профиль", user_profile_url(current_user.id)%></li>
-      <li><%=link_to "Мои события", my_events_path%><li>
+   <div class="navbar-collapse collapse">
+     <ul class="nav navbar-nav">
+       <li><%=link_to "Главная", root_path%></li>
+       <li><%=link_to "События", events_path%></li>
+      <% if user_signed_in? {}%>
+       <li><%=link_to "Профиль", user_profile_url(current_user.id)%></li>
+       <li><%=link_to "Мои события", my_events_path%><li>
       <%end%>
-
     </ul>
-
     <ul class="nav navbar-nav  navbar-right" style="margin-right: 23px">
-
-
       <% if user_signed_in? %>
-
           <h5 style="color: #EFEFEF">Здравствуйте, <%= current_user.first_name+" "+current_user.last_name %></h5>
           <%= link_to '<button type="button" class="btn btn-primary">Выйти</button>'.html_safe,  destroy_user_session_path, :method => :delete %>
-
       <% else %>
           <%= link_to '<button type="button" class="btn btn-primary">Войти</button>'.html_safe, new_user_session_path %>
           <%= link_to '<button type="button" class="btn btn-primary">Регистрация</button>'.html_safe, new_user_registration_path %>
-
       <% end %>
     </ul>
-
-
+   </div>
+  </div>
 </div>
-    </div>
-    </div>
 
 
 

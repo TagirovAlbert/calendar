@@ -1,15 +1,12 @@
 <div class="container-alba"><p id="notice"><%= notice %></p>
-
 <p>
   <strong>Название:</strong>
   <%= @event.name %>
 </p>
-
 <p>
   <strong>Описание события:</strong>
   <%= @event.description %>
 </p>
-
 <p>
   <strong>Дата:</strong>
   <%= @event.date_rem %>
@@ -18,14 +15,14 @@
   <strong>Автор:</strong>
   <%= @event.user.first_name + " "+ @event.user.last_name %>
 </p>
-  <p>
-    <strong>Статус:</strong>
-    <%if (@event.private) %>
+<p>
+  <strong>Статус:</strong>
+  <%if (@event.private) %>
       <p>Приватный</p>
       <%else%>
       <p>Публичный</p>
-    <%end%>
-  </p>
+  <%end%>
+</p>
 
 <% if (@event.private) %>
 <%= link_to 'Редактировать', edit_event_path(@event) ,class: 'form-control input-lg'%>
@@ -33,11 +30,7 @@
   <%elsif (!@event.private &&@event.user.email.eql?(current_user.email))%>
       <%= link_to 'Редактировать', edit_event_path(@event), class: 'form-control input-lg' %>
       <%= link_to 'Назад', events_path,class: 'form-control input-lg' %>
-
-<%else%>
-
+  <%else%>
       <%= link_to 'Назад', events_path,class: 'form-control input-lg' %>
 <%end%>
-
-
 </div>

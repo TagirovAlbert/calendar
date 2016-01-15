@@ -1,0 +1,16 @@
+<div id="events">
+  <%= render 'title' %>
+  <%= calendar @date do |date_my|%>
+      <%= date_my.day%>
+      <% if @events_by_date[date_my]  %>
+          <ul>
+            <% @events_by_date[date_my].each do |event| %>
+                <li><%= link_to event.name, event  %></li>
+            <%end%>
+          </ul>
+      <%end%>
+  <%end%>
+</div>
+<div class="container-alba">
+  <%= link_to 'Новое событие', new_event_path,:class => 'btn btn-primary' %>
+</div>

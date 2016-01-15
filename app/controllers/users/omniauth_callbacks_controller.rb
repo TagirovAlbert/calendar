@@ -1,5 +1,4 @@
 class Users::OmniauthCallbacksController < ApplicationController
-
   def facebook
     @user = User.find_for_facebook_oauth(env["omniauth.auth"])
      if @user.persisted?
@@ -10,8 +9,6 @@ class Users::OmniauthCallbacksController < ApplicationController
        redirect_to new_user_registration_url
      end
   end
-
-
 
   def after_sign_in_path_for(resource)
     if resource.email_verified?

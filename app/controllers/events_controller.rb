@@ -3,74 +3,52 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
-  # GET /events
-  # GET /events.json
   def index
-
-    @events = Event.is_public
+    @events = Event.public_events
     @my_list_events=Array.new
     @events.each do |public_event|
       event_date=public_event.date_rem
-      if public_event.everyyear
+      if public_event.yearly
         years=Recurrence.yearly(:on=> [event_date.mon,event_date.mday])
         event_iter(years,@my_list_events,public_event)
       else
-        @my_list_events<<public_event
-
+        @my_list_events.push(public_event)
       end
     end
-    @events_by_date_all=@my_list_events.group_by { |i| i.date_rem }
+    @events_by_date=@my_list_events.group_by { |i| i.date_rem }
     @date= params[:date_rem] ? params[:date_rem].to_date : Date.today
+  end
 
-    end
   def my_index
     @my_events=current_user.events.all
     @my_list_events=Array.new
     @my_events.each do |my_event|
       event_date=my_event.date_rem
-    if my_event.private
-      if my_event.everyday
-        days = Recurrence.daily(:through => event_date.next_month)
-        event_iter(days,@my_list_events,my_event)
-
+      if my_event.private
+        if my_event.daily
+          days = Recurrence.daily(:through => event_date.next_month)
+          event_iter(days,@my_list_events,my_event)
         end
-
-      if my_event.everyweek
-        weeks=Recurrence.weekly(:on => event_date.wday,:start=>event_date,  :through=>event_date.next_year)
-        event_iter(weeks,@my_list_events,my_event)
+        if my_event.weekly
+          weeks=Recurrence.weekly(:on => event_date.wday,:start=>event_date,  :through=>event_date.next_year)
+          event_iter(weeks,@my_list_events,my_event)
+        end
+        if my_event.monthly
+          months=Recurrence.monthly(:on => event_date.mday, :start=>event_date,:through=>event_date.next_year(2))
+          event_iter(months,@my_list_events,my_event)
+        end
+        if my_event.yearly
+          years=Recurrence.yearly(:on=> [event_date.mon,event_date.mday])
+          event_iter(years,@my_list_events,my_event)
+        end
+      else
+        @my_list_events.push(my_event)
       end
-
-      if my_event.everymonth
-        months=Recurrence.monthly(:on => event_date.mday, :start=>event_date,:through=>event_date.next_year(2))
-        event_iter(months,@my_list_events,my_event)
-
-      end
-
-      if my_event.everyyear
-        years=Recurrence.yearly(:on=> [event_date.mon,event_date.mday])
-        event_iter(years,@my_list_events,my_event)
-      end
-    else
-      @my_list_events<<my_event
-
-      end
-
-
-
-
-
     end
     @my_list_events.uniq! { |uniq_event| [uniq_event.id, uniq_event.date_rem] }
-    @events_by_date_my= @my_list_events.group_by {|j| j.date_rem}
+    @events_by_date= @my_list_events.group_by {|j| j.date_rem}
     @date= (params[:date_rem] ? params[:date_rem] : Date.today).to_date
-
   end
-
-
-
-
-
-
 
   # GET /events/1
   # GET /events/1.json
@@ -133,29 +111,22 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
     end
 
-  def event_iter(reccure,list,event)
-    reccure.each do |my_reccure|
-      event_curr=Event.find_or_initialize_by(id: event[:id],date_rem: event[:date_rem])
-      event_curr.date_rem=my_reccure
-
-      list<<event_curr
-
-
-
-
+    def event_iter(reccure,list,event)
+      reccure.each do |my_reccure|
+        event_curr = Event.find_or_initialize_by(id: event[:id],date_rem: event[:date_rem])
+        event_curr.date_rem = my_reccure
+        list.push(event_curr)
+      end
     end
-end
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      po=params.require(:event).permit(:name, :description, :private, :everyday, :everyweek,:everymonth, :everyyear)
+      po=params.require(:event).permit(:name, :description, :private, :daily, :weekly,:monthly, :yearly)
       po[:date_rem]=event_param_date
       po
     end
 
     def event_param_date
       date_param=params.require(:event).permit(:date_rem)
-      p= Date.parse( date_param.to_a.sort.collect{|c| c[1]}.join("-"))
-      p
+      Date.parse( date_param.to_a.sort.collect{|c| c[1]}.join("-"))
     end
-
 end
